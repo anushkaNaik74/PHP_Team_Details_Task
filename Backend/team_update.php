@@ -140,17 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="pr_team_con_2" id="pr_team_con_2" placeholder="Enter Con 2" value="<?php echo $team_con2; ?>">
       </div>
 
-      <label>Image</label>
-        <!-- Hidden input to store the existing image path -->
-        <input type="hidden" name="existing_image" value="<?php echo $team_image; ?>">
-        <br><br>
-
-        <!-- New image upload field -->
-      <div class="form-row">
-        <label for="pr_team_image">Team Image</label>
-        <input type="file" name="pr_team_image" id="pr_team_image" >
-      </div>
-
       <div class="form-row">
         <label for="pr_team_dob">Team DOB</label>
         <input type="text" name="pr_team_dob" id="pr_team_dob" placeholder="Enter Team DOB" value="<?php echo $team_dob; ?>">

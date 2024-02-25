@@ -4,8 +4,7 @@ body {
     padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 20vh;
+    align-items: center;   
     background-color: #f4f4f4;
   }
   
@@ -117,6 +116,51 @@ body {
     .form-row input[type="text"] {
       font-size: 14px;
     }
+  }
+
+
+  .fa-eye,.fa-eye-slash {
+    float: right;
+    margin-right: 20px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+  }
+  #frmCheckPassword {
+                  
+                  
+              }
+  
+              .demoInputBox {
+                  
+                  border: #F0F0F0 1px solid;
+                  
+              }
+  
+              #password-strength-status {
+                  padding: 5px 10px;
+                  color: #FFFFFF;
+                  border-radius: 4px;
+                  margin-top: 5px;
+              }
+  
+              .medium-password {
+                  background-color: #ffb600;
+                  border: #BBB418 1px solid;
+                  color:#000000;
+              }
+  
+              .weak-password {
+                  background-color: #ce1d14;
+                  border: #AA4502 1px solid;
+              }
+  
+              .strong-password {
+                  background-color: #12CC1A;
+                  border: #0FA015 1px solid;
+              }
+              .btn.btn-register:disabled{
+      background-color: #338767;
   }
   
   
