@@ -28,14 +28,11 @@ CREATE TABLE `pr_team` (
   `pr_team_email` varchar(255) DEFAULT NULL,
   `pr_team_con_1` varchar(255) DEFAULT NULL,
   `pr_team_con_2` varchar(255) DEFAULT NULL,
-  `pr_team_image` varchar(255) DEFAULT NULL,
   `pr_team_dob` varchar(255) DEFAULT NULL,
   `pr_team_doj` varchar(255) DEFAULT NULL,
-  `pr_team_address` varchar(255) DEFAULT NULL,
-  `pr_team_desc` varchar(255) DEFAULT NULL,
-  `pr_team_status` int DEFAULT NULL,
+  `pr_team_password` varchar(10) NOT NULL,
   PRIMARY KEY (`pr_team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +41,7 @@ CREATE TABLE `pr_team` (
 
 LOCK TABLES `pr_team` WRITE;
 /*!40000 ALTER TABLE `pr_team` DISABLE KEYS */;
-INSERT INTO `pr_team` VALUES (5,'abcd','anushkanaik74@gmail.com','con1','con2','banner5.jpg','abc','abc','abc','abcxyz',1);
+INSERT INTO `pr_team` VALUES (43,'abc','abc@gmail.com','7218957380','','01-01-2024','24-02-2024','Anushka@25'),(44,'abcxyz','abc@gmail.com','7218957380','','01-01-2024','24-02-2024','abc@123');
 /*!40000 ALTER TABLE `pr_team` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-09 18:43:33
+-- Dump completed on 2024-02-26 19:01:33
