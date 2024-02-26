@@ -1,5 +1,67 @@
 <?php $con = mysqli_connect("localhost", "root", "Anushka@25", "pr_project"); ?>
 
+<?php
+
+ob_start();
+
+    // Variables to store form data
+    $team_name = $team_email = $team_con1 = $team_con2 = $team_dob = $team_doj = $team_password = '';
+
+
+    if(isset($_POST['submit'])){
+
+        $team_name              = $_POST['pr_team_name'];
+        $team_email             = $_POST['pr_team_email'];
+        $team_con1              = $_POST['pr_team_con_1'];
+        $team_con2             = $_POST['pr_team_con_2'];
+        $team_dob               = $_POST['pr_team_dob'];
+        $team_doj               = $_POST['pr_team_doj'];
+        $team_password          = $_POST['password'];
+
+
+        if ($_POST['password'] != $_POST['confirm_password']) {
+          header('Location: team_insert.php');
+          exit;
+      }
+      
+        
+
+        // Insert data into the database
+        $insert_team_query = "INSERT INTO pr_team (
+                                pr_team_name, 
+                                pr_team_email, 
+                                pr_team_con_1, 
+                                pr_team_con_2, 
+                                pr_team_dob, 
+                                pr_team_doj,
+                                pr_team_password
+                                
+                            ) VALUES (
+                                '$team_name', 
+                                '$team_email', 
+                                '$team_con1', 
+                                '$team_con2', 
+                                '$team_dob',
+                                '$team_doj',
+                                '$team_password'
+                            )";
+
+        // Execute the SQL query
+
+        if (mysqli_query($con, $insert_team_query)) {
+          // Redirect to another page after successful insertion
+          header('Location: team_insert.php');
+          exit; // Make sure to exit after redirection
+      } else {
+          echo "Error: " . $insert_team_query . "<br>" . mysqli_error($con);
+      }
+        } 
+        
+
+   ob_end_flush(); 
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +74,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
-  <form method="post" enctype="multipart/form-data">
+  <form id="registration_form" method="post" enctype="multipart/form-data">
     <div class="wrapper">
       <div class="form-row">
         <label for="pr_team_name">Team Name</label>
@@ -53,16 +115,15 @@
 
       <div class="form-group form-row">
       <label for="pr_team_password">Password</label>
-				    <input type="password" name="password" id="password"  class="form-control" tabindex="1" placeholder="Password" class="demoInputBox" onKeyUp="checkPasswordStrength();" maxlength="10" required><span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+				    <input type="password" name="password" id="password" tabindex="1" placeholder="Password" class="form-control demoInputBox" onKeyUp="checkPasswordStrength();" maxlength="10" required><span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
                 <div id="password-strength-status"></div>
 				</div>
 
 				<div class="form-group form-row">
         <label for="pr_team_cpassword">Confirm Password</label>
-				    <input type="password" name="confirm_password" id="confirm_password" tabindex="1" class="form-control" placeholder="Confirm Password" required><span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password2"></span>
+				    <input type="password" name="confirm_password" id="confirm_password" tabindex="1" class="form-control" placeholder="Confirm Password" maxlength="10" required><span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password2"></span>
 				</div>
         <div id="msg"></div>
-
 
       <div class="buttonSubmit">
         <input type="submit" name="submit" value="Submit">
@@ -112,72 +173,9 @@
       }
     ?>
   </table>
-
   
-  </body>
-</html>
-
-
-<?php
-
-    // Variables to store form data
-    $team_name = $team_email = $team_con1 = $team_con2 = $team_dob = $team_doj = $team_password = '';
-
-
-    if(isset($_POST['submit'])){
-
-        $team_name              = $_POST['pr_team_name'];
-        $team_email             = $_POST['pr_team_email'];
-        $team_con1              = $_POST['pr_team_con_1'];
-        $team_con2             = $_POST['pr_team_con_2'];
-        $team_dob               = $_POST['pr_team_dob'];
-        $team_doj               = $_POST['pr_team_doj'];
-        $team_password          = $_POST['password'];
-
-
-        if ($_POST['password'] != $_POST['confirm_password']) {
-          echo "Passwords do not match";
-          exit;
-      }
-        
-
-        // Insert data into the database
-        $insert_team_query = "INSERT INTO pr_team (
-                                pr_team_name, 
-                                pr_team_email, 
-                                pr_team_con_1, 
-                                pr_team_con_2, 
-                                pr_team_dob, 
-                                pr_team_doj,
-                                pr_team_password
-                                
-                            ) VALUES (
-                                '$team_name', 
-                                '$team_email', 
-                                '$team_con1', 
-                                '$team_con2', 
-                                '$team_dob',
-                                '$team_doj',
-                                '$team_password'
-                            )";
-
-        // Execute the SQL query
-
-        if (mysqli_query($con, $insert_team_query)) {
-            echo'<script>alert("Team Registered Successfully");</script>';
-            header('location: team_insert.php');
-        } else {
-            echo "Error: " . $insert_team_query . "<br>" . mysqli_error($con);
-        }
-        } 
-        
-    
-?>
-
-
-
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
@@ -191,6 +189,7 @@ $(function(){
     });
 })
 </script>
+
 
 <script>
      $("body").on('click', '.toggle-password', function() {
@@ -220,10 +219,7 @@ $(function(){
    </script>
 
 
-
-
-
-   <script>
+<script>
      function checkPasswordStrength() {
             var number = /([0-9])/;
             var alphabets = /([a-zA-Z])/;
@@ -260,7 +256,30 @@ $(function(){
 
                     }
    </script>
-   <script>
+
+<script>
+  $(document).ready(function(){
+    
+    $('#password').keyup(function(){
+        if($(this).val().length ==0)            
+            $('#register-submit').attr('disabled',true);    
+        })
+
+});
+
+</script>
+<script>
+ $('#password').keyup(function(){ 
+var str = $('#password').val();
+var regex =  /^[A-Za-z0-9.!@#$%*]+$/;
+
+if(regex.test(str) != true) {
+    $('#password-strength-status').html("only !@#$%&* symbols are allowed)");
+}
+ })
+</script>
+
+<script>
     
 
     $(document).ready(function(){
@@ -283,61 +302,51 @@ $(function(){
 
 
                 }); 
-               
-});
-</script>
-<script>
 
- // AJAX form submission
- $('.buttonSubmit input[type="submit"]').click(function(e){
-        e.preventDefault(); // prevent default form submission
-        var password = $("#password").val();
-        var confirm_password = $("#confirm_password").val();
-        if (password != confirm_password) {
-            alert("Passwords do not match");
-            return; // exit submission if passwords don't match
-        }
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo $_SERVER["PHP_SELF"]; ?>', // Submit to the same PHP script
-            data: $('#registration_form').serialize(), // Serialize form data
-            success: function(response){
-                alert(response); // Alert success or error message from PHP script
-                if(response.trim() === "Team Registered Successfully") {
-                    // Redirect upon successful registration
+                    // AJAX form submission
+            $('#registration_form').submit(function(e){
+                // e.preventDefault(); // prevent default form submission
+                var password = $("#password").val();
+                var confirm_password = $("#confirm_password").val();
+                if (password != confirm_password) {
+                    alert("Passwords do not match");
                     window.location.href = 'team_insert.php';
+                     // exit submission if passwords don't match
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
+                
+                // Log serialized form data
+              console.log("Serialized form data:", $('#registration_form').serialize());
+              
+              
+            });
+
+            $.ajax({
+                  type: 'POST',
+                  url: '<?php echo $_SERVER["PHP_SELF"]; ?>', // Submit to the same PHP script
+                  data: $('#registration_form').serialize(), // Serialize form data
+                  success: function(response){
+                      
+                          // window.location.href = 'team_insert.php';
+                      
+                  },
+                  error: function(xhr, status, error) {
+                      console.error(xhr.responseText);
+                  }
+              });
+
+                
     });
-});
+
+               
+
 
      
    </script>
-   <script>
 
-   </script>
-<script>
-  $(document).ready(function(){
-    
-    $('#password').keyup(function(){
-        if($(this).val().length ==0)            
-            $('#register-submit').attr('disabled',true);    
-        })
 
-});
+  </body>
+</html>
 
-</script>
-<script>
- $('#password').keyup(function(){ 
-var str = $('#password').val();
-var regex =  /^[A-Za-z0-9.!@#$%*]+$/;
 
-if(regex.test(str) != true) {
-    $('#password-strength-status').html("only !@#$%&* symbols are allowed)");
-}
- })
-</script>
+
+
